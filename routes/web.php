@@ -8,13 +8,20 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\StakeholderController;
 use App\Http\Controllers\SalesActivityController;
 
-// Geçici veritabanı kurulum rotası
+// Geçici veritabanı kurulum ve önbellek temizleme rotası
 Route::get('/setup-database', function () {
     try {
+        // Tüm önbellekleri temizle
+        Artisan::call('route:clear');
+        Artisan::call('config:clear');
+        Artisan::call('view:clear');
+        
+        // Veritabanı migrasyonunu çalıştır
         Artisan::call('migrate', ['--force' => true]);
-        return "Veritabanı migrasyonları başarıyla çalıştırıldı.";
+        
+        return "Önbellek temizlendi ve veritabanı migrasyonları başarıyla çalıştırıldı.";
     } catch (\Exception $e) {
-        return "Migrasyon sırasında bir hata oluştu: " . $e->getMessage();
+        return "İşlem sırasında bir hata oluştu: " . $e->getMessage();
     }
 });
 
