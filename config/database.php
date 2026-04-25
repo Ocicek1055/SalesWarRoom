@@ -45,7 +45,9 @@ return [
 
         'mysql' => [
     'driver' => 'mysql',
-    'host' => 'viaduct.proxy.rlwy.net',
+    // BURAYI MYSQL SERVİSİNİN 'CONNECT' SEKEMESİNDEKİ 'PRIVATE HOST' İLE DEĞİŞTİRİN
+    // Genellikle 'mysql.railway.internal' veya benzeri bir şeydir.
+    'host' => 'mysql.railway.internal', 
     'port' => '3306',
     'database' => 'railway',
     'username' => 'root',
