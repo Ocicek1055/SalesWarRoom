@@ -15,7 +15,8 @@ class HomeController extends Controller
         $totalResidences = Project::sum('number_of_residences');
         $totalContractors = Contractor::count();
         $todaySalesActivities = SalesActivity::whereDate('activity_date', Carbon::today())->count();
+        $activeProjects = Project::where('end_date', '>=', Carbon::today())->orWhereNull('end_date')->count();
 
-        return view('welcome', compact('totalResidences', 'totalContractors', 'todaySalesActivities'));
+        return view('welcome', compact('totalResidences', 'totalContractors', 'todaySalesActivities', 'activeProjects'));
     }
 }
