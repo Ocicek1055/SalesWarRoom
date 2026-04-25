@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => 'mysql',
 
     /*
     |--------------------------------------------------------------------------
@@ -45,12 +45,12 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('MYSQLHOST', '127.0.0.1'),
-            'port' => env('MYSQLPORT', '3306'),
-            'database' => env('MYSQLDATABASE', 'laravel'),
-            'username' => env('MYSQLUSER', 'root'),
-            'password' => env('MYSQLPASSWORD', ''),
-            'unix_socket' => env('DB_SOCKET', ''),
+            'host' => 'db',
+            'port' => '3306',
+            'database' => 'railway',
+            'username' => 'root',
+            'password' => 'TNn3CSyNCnKoydD3DCEtVd1e2TnmJcya',
+            'unix_socket' => '',
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
