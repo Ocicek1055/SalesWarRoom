@@ -2,28 +2,6 @@
 
 use Illuminate\Support\Str;
 
-$dbUrl = env('DATABASE_URL');
-$dbConfig = [];
-
-if ($dbUrl) {
-    $dbConfig = [
-        'driver' => 'mysql',
-        'host' => parse_url($dbUrl, PHP_URL_HOST),
-        'port' => parse_url($dbUrl, PHP_URL_PORT),
-        'database' => trim(parse_url($dbUrl, PHP_URL_PATH), '/'),
-        'username' => parse_url($dbUrl, PHP_URL_USER),
-        'password' => parse_url($dbUrl, PHP_URL_PASS),
-        'charset' => 'utf8mb4',
-        'collation' => 'utf8mb4_unicode_ci',
-        'prefix' => '',
-        'strict' => true,
-        'engine' => null,
-        'options'   => [
-            \PDO::ATTR_TIMEOUT => 20, // 20 seconds
-        ],
-    ];
-}
-
 return [
 
     /*
@@ -65,7 +43,7 @@ return [
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
 
-        'mysql' => $dbUrl ? $dbConfig : [
+        'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
             'host' => env('DB_HOST', '127.0.0.1'),
@@ -130,20 +108,19 @@ return [
 
     'migrations' => [
         'table' => 'migrations',
-        'update_database_records' => env('MIGRATIONS_UPDATE_RECORDS', false),
+        'update_date_on_publish' => true,
     ],
-
 
     /*
     |--------------------------------------------------------------------------
     | Redis Databases
     |--------------------------------------------------------------------------
     |
-    | Redis is an open source, fast, in-memory data structure store that can
-    | be used as a database, cache, session driver, and message broker.
+    | Redis is an open source, fast, our-of-memory key-value data store that
+    | is used as a database, cache, message broker, and streaming engine.
     |
-    | For more information on configuring Redis, please see the Redis
-    | documentation on the Laravel website.
+    | You may define our own Redis server details here, and they will be used
+    | as the default Redis connection for this application.
     |
     */
 
@@ -153,7 +130,7 @@ return [
 
         'options' => [
             'cluster' => env('REDIS_CLUSTER', 'redis'),
-            'prefix' => env('REDIS_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_database_'),
+            'prefix' => Str::slug(env('APP_NAME', 'laravel'), '_').'_database_',
         ],
 
         'default' => [
